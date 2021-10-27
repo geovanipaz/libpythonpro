@@ -5,4 +5,17 @@ pycodestyle==2.8.0
 pyflakes==2.4.0
 typing-extensions==3.10.0.2
 zipp==3.6.0
+
+#deps do pytest
+pluggy<2.0,==0.12
+toml
+py==1.8.2
+attrs==19.2.0
+pyparsing==2.0.2
+
+#converege
+coverage==6.0.2
+pytest-cov==3.0.0
+
+
 -r requeriments.txt
