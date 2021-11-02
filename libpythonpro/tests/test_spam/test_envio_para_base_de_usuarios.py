@@ -1,0 +1,30 @@
+from libpythonpro.spam.enviador_de_email import Enviador
+from libpythonpro.spam.main import EnviadorDeSpam
+
+from libpythonpro.spam.modelos import Usuario
+import pytest
+
+
+@pytest.mark.parametrize(
+    'usuarios',
+    [
+        [
+            Usuario(nome='Renzo', email='renzo@mail.com'),
+            Usuario(nome='Geovani', email='geovanipaz7@mail.com')
+        ],
+        [
+            Usuario(nome='Geovani', email='geovanipaz7@mail.com')
+        ]
+    ]
+)
+def test_qde_de_spam(sessao, usuarios):
+    for usuario in usuarios:
+        sessao.salvar(usuario)
+    enviador = Enviador()
+    enviador_de_spam = EnviadorDeSpam(sessao, enviador)
+    enviador_de_spam.enviar_emails(
+        'geovanipaz7@gmail.com',
+        'Curso Python Pro',
+        'Confira os cursos fantásticos'
+    )
+    assert len(usuarios) == enviador.qtd_email_enviados
